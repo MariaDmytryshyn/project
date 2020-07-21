@@ -3,12 +3,16 @@ package app.model.dao.impl;
 import app.model.dao.BillDao;
 import app.model.dao.mapper.BillMapper;
 import app.model.entity.Bill;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BillDaoImpl implements BillDao {
+
+    private static Logger logger = LogManager.getLogger(BillDaoImpl.class);
 
     private Connection connection;
 
@@ -28,9 +32,10 @@ public class BillDaoImpl implements BillDao {
                 Bill bill = billMapper.extractFromResultSet(resultSet);
                 bills.add(bill);
             }
+            logger.info("Found all unpaid bills" + bills);
             return bills;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("e");
             return null;
         }
     }
@@ -46,9 +51,10 @@ public class BillDaoImpl implements BillDao {
                 Bill bill = billMapper.extractFromResultSet(resultSet);
                 bills.add(bill);
             }
+            logger.info("Found all paid bills " + bills);
             return bills;
         } catch (SQLException e) {
-            e.printStackTrace();
+           logger.error(e);
             return null;
         }
     }
@@ -64,9 +70,10 @@ public class BillDaoImpl implements BillDao {
                 Bill bill = billMapper.extractFromResultSet(resultSet);
                 bills.add(bill);
             }
+            logger.info("Found all unpaid bills " + bills + " by user " + user_id);
             return bills;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
             return null;
         }
     }
@@ -82,9 +89,10 @@ public class BillDaoImpl implements BillDao {
                 Bill bill = billMapper.extractFromResultSet(resultSet);
                 bills.add(bill);
             }
+            logger.info("Found all paid bills " + bills + " by user " + user_id);
             return bills;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
             return null;
         }
     }
@@ -97,10 +105,11 @@ public class BillDaoImpl implements BillDao {
             BillMapper billMapper = new BillMapper();
             while (resultSet.next()) {
                 Bill bill = billMapper.extractFromResultSet(resultSet);
+                logger.info("Found bill " + bill);
                 return bill;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         return null;
     }
@@ -115,9 +124,10 @@ public class BillDaoImpl implements BillDao {
             while (resultSet.next()) {
                 Bill bill = billMapper.extractFromResultSet(resultSet);
                 bills.add(bill);}
+            logger.info("All bills found " + bills);
             return bills;
         } catch (SQLException e) {
-            e.printStackTrace(); }
+            logger.error(e); }
         return null;
     }
 
@@ -134,11 +144,12 @@ public class BillDaoImpl implements BillDao {
             preparedStatement.setString(6, entity.getBillStatus().toString());
             preparedStatement.setString(7, entity.getBillStatus_en().toString());
             if (preparedStatement.executeUpdate() > 0) {
+                logger.info("Bill is inserted");
                 return entity;
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         return null;
     }
@@ -147,16 +158,23 @@ public class BillDaoImpl implements BillDao {
     public boolean update(Bill entity) {
         String sql = "UPDATE bill SET status = 'оплачений', status_en = 'paid'  WHERE id=" + entity.getId();
         try (PreparedStatement statement = connection.prepareStatement(sql)){
-            return (statement.executeUpdate(sql)>0);
+            boolean res = statement.executeUpdate(sql)>0;
+            if (res == true ) {
+                logger.info("Bill is updated");
+            }
+            else {
+                logger.info("Bill is not updated");
+            }
+            return res;
             } catch (SQLException ex) {
-            ex.printStackTrace();
+            logger.error(ex);
         }
         return false;
     }
 
 
     @Override
-    public void deleteById(int entityId) {
-
+    public boolean deleteById(int entityId) {
+return false;
     }
 }

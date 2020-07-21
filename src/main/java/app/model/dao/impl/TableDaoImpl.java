@@ -71,7 +71,7 @@ public class TableDaoImpl implements TablesDao {
     }
 
     @Override
-    public void deleteById(int entityId) {
-
+    public boolean deleteById(int entityId) {
+return false;
     }
 }

@@ -66,8 +66,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteById(int entityId) {
-
+    public boolean deleteById(int entityId) {
+return false;
     }
 
     @Override
@@ -79,7 +79,6 @@ public class UserDaoImpl implements UserDao {
             User user = userMapper.extractFromResultSet(resultSet);
             logger.info("User found " + user  + " with login " + log + " and password " + pass);
             return user;
-
         } catch (SQLException e) {
             logger.error(e);
         }
@@ -95,7 +94,6 @@ public class UserDaoImpl implements UserDao {
             User user = userMapper.extractFromResultSet(resultSet);
             logger.info("User found " + user  + " with email " + email);
             return user;
-
         } catch (SQLException e) {
             logger.error(e);
         }
@@ -111,7 +109,6 @@ public class UserDaoImpl implements UserDao {
             User user = userMapper.extractFromResultSet(resultSet);
             logger.info("User found " + user  + " with mobile number " + mobnumber);
             return user;
-
         } catch (SQLException e) {
             logger.error(e);
         }

@@ -5,12 +5,16 @@ import app.model.dao.CategoryDao;
 import app.model.dao.mapper.CategoryMapper;
 
 import app.model.entity.Category;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDaoImpl implements CategoryDao {
+
+    private static Logger logger = LogManager.getLogger(CategoryDaoImpl.class);
 
     private Connection connection;
 
@@ -24,12 +28,11 @@ public class CategoryDaoImpl implements CategoryDao {
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
             CategoryMapper categoryMapper = new CategoryMapper();
-            while (resultSet.next()) {
-                Category category = categoryMapper.extractFromResultSet(resultSet);
-                return category;
-            }
+            Category category = categoryMapper.extractFromResultSet(resultSet);
+            logger.info("Found category " +category);
+            return category;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         return null;
     }
@@ -45,9 +48,10 @@ public class CategoryDaoImpl implements CategoryDao {
                 Category category = categoryMapper.extractFromResultSet(resultSet);
                 categories.add(category);
             }
+            logger.info("Found all categories " + categories);
             return categories;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
             return null;
         }
     }
@@ -59,10 +63,11 @@ public class CategoryDaoImpl implements CategoryDao {
             preparedStatement.setString(1, entity.getCategoryName());
             preparedStatement.setString(2, entity.getCategoryName_en());
             if (preparedStatement.executeUpdate() > 0) {
+                logger.info("Category is inserted " + entity);
                 return entity;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         return null;
     }
@@ -74,13 +79,21 @@ public class CategoryDaoImpl implements CategoryDao {
 
 
     @Override
-    public void deleteById(int entityId) {
+    public boolean deleteById(int entityId) {
         String sql = "delete from category where  id=" + entityId;
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            int res = statement.executeUpdate(sql);
+            boolean res = statement.executeUpdate(sql) > 0;
+            if ( res == true) {
+                logger.info("Category is deleted");
+            }
+            else {
+                logger.info("Category is not deleted");
+            }
+            return res;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
+        return false;
     }
 }

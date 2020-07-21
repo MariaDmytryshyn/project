@@ -13,5 +13,5 @@ public interface Dao<T> {
 
     boolean update(T entity);
 
-    void deleteById(int entityId);
+    boolean deleteById(int entityId);
 }

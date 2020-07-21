@@ -104,7 +104,7 @@ public class OrderDaoImpl implements OrdersDao {
     }
 
     @Override
-    public void deleteById(int entityId) {
-
+    public boolean deleteById(int entityId) {
+return false;
     }
 }

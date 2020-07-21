@@ -40,8 +40,9 @@ public class OrderDishDaoImpl implements OrderDishDao {
         String sql = "delete from order_dish where  order_id=" + order_id + " and dish_id = " + dish_id;
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.executeUpdate(sql);
+            logger.info("Deleted dish number" + dish_id + " from order number " + order_id);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 
@@ -57,7 +58,7 @@ public class OrderDishDaoImpl implements OrderDishDao {
                 dishes_id.add(dish.getDish_id());
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
             return null;
         }
         List<Dish> dishes = new ArrayList<>();
@@ -71,9 +72,11 @@ public class OrderDishDaoImpl implements OrderDishDao {
                     dishes.add(dish);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error(e);
+                return null;
             }
         }
+        logger.info("Found dishes of order number " + order_id);
         return dishes;
     }
 
@@ -98,7 +101,7 @@ public class OrderDishDaoImpl implements OrderDishDao {
     }
 
     @Override
-    public void deleteById(int entityId) {
-
+    public boolean deleteById(int entityId) {
+return false;
     }
 }
