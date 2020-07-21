@@ -12,15 +12,19 @@ public class User {
     private String e_mail;
     private String mob_number;
 
+    public enum ROLE {
+        USER, ADMIN;
+    }
+
+    private ROLE role;
+
     private ArrayList<Orders> orders;
     private ArrayList<Bill> bills;
 
     public User() {
     }
 
-    public User(int id, String name, String login, String password, String e_mail, String mob_number) {
-        this.id = id;
-        this.name = name;
+    public User(String login, String password, String e_mail, String mob_number) {
         this.login = login;
         this.password = password;
         this.e_mail = e_mail;
@@ -41,6 +45,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ROLE getRole() {
+        return role;
+    }
+
+    public void setRole(ROLE role) {
+        this.role = role;
     }
 
     public String getLogin() {

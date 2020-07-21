@@ -46,22 +46,22 @@ public class DaoFactoryImpl extends DaoFactory {
 
     @Override
     public OrdersDao createOrderDao() {
-        return null;
+        return new OrderDaoImpl(connection);
     }
 
     @Override
     public TablesDao createTableDao() {
-        return null;
+        return new TableDaoImpl(connection);
     }
 
     @Override
     public UserDao createUserDao() {
-        return null;
+        return new UserDaoImpl(connection);
     }
 
     @Override
     public WaiterDao createWaiterDao() {
-        return null;
+        return new WaiterDaoImpl(connection);
     }
 
 }

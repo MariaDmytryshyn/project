@@ -4,7 +4,6 @@ import app.model.dao.OrdersDao;
 import app.model.dao.mapper.OrderMapper;
 import app.model.entity.Dish;
 import app.model.entity.Orders;
-import com.mysql.cj.x.protobuf.MysqlxCrud;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,21 +31,48 @@ public class OrderDaoImpl implements OrdersDao {
                 Orders order = orderMapper.extractFromResultSet(resultSet);
                 orders.add(order);
             }
+            logger.info("Found all orders made by user " + user_id + " list :" +orders);
             return orders;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
             return null;
         }
     }
 
     @Override
     public Orders findOne(int id) {
+        String sql = "SELECT * FROM orders WHERE id= " + id;
+        try (Statement statement = connection.createStatement()){
+            ResultSet resultSet = statement.executeQuery(sql);
+            OrderMapper orderMapper = new OrderMapper();
+            while (resultSet.next()) {
+                Orders order = orderMapper.extractFromResultSet(resultSet);
+                logger.info("Found order by id " + order);
+                return order;
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+        }
         return null;
     }
 
     @Override
     public List<Orders> findAll() {
-        return null;
+        String sql = "SELECT * from orders";
+        List<Orders>  orders= new ArrayList<>();
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(sql);
+            OrderMapper orderMapper = new OrderMapper();
+            while (resultSet.next()){
+                Orders order = orderMapper.extractFromResultSet(resultSet);
+                orders.add(order);
+            }
+            logger.info("Found all orders" + orders);
+            return orders;
+        } catch (SQLException e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     @Override
