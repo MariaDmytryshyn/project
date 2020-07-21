@@ -1,5 +1,7 @@
 package app.model.dao;
 
+import app.model.dao.impl.DaoFactoryImpl;
+
 public abstract class DaoFactory {
     private static DaoFactory daoFactory;
 
@@ -13,15 +15,15 @@ public abstract class DaoFactory {
     public abstract WaiterDao createWaiterDao();
 
 
-//    public static DaoFactory getInstance(){
-//        if( daoFactory == null ){
-//            synchronized (DaoFactory.class){
-//                if(daoFactory==null){
-//                    DaoFactory temp = new DaoFactoryImpl();
-//                    daoFactory = temp;
-//                }
-//            }
-//        }
-//        return daoFactory;
-//    }
+    public static DaoFactory getInstance(){
+        if( daoFactory == null ){
+            synchronized (DaoFactory.class){
+                if(daoFactory==null){
+                    DaoFactory temp = new DaoFactoryImpl();
+                    daoFactory = temp;
+                }
+            }
+        }
+        return daoFactory;
+    }
 }

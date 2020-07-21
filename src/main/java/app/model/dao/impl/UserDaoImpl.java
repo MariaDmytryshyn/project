@@ -6,10 +6,7 @@ import app.model.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +54,22 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User insert(User entity) {
+        String sql = "INSERT INTO user(name, login, password, e_mail, mob_number, role) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, entity.getName());
+            preparedStatement.setString(2, entity.getLogin());
+            preparedStatement.setString(3, entity.getPassword());
+            preparedStatement.setString(4, entity.getE_mail());
+            preparedStatement.setString(5, entity.getMob_number());
+            preparedStatement.setString(6, entity.getRole().toString());
+            if (preparedStatement.executeUpdate() > 0) {
+                logger.info("User is inserted");
+                return entity;
+            }
+        }
+        catch (SQLException e) {
+            logger.error(e);
+        }
         return null;
     }
 

@@ -12,13 +12,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WaiterDaoImpl implements WaiterDao {
 
     private static Logger logger = LogManager.getLogger(WaiterDaoImpl.class);
 
-    Connection connection;
+    private Connection connection;
 
     public WaiterDaoImpl(Connection connection) {
         this.connection = connection;
@@ -85,6 +86,21 @@ public class WaiterDaoImpl implements WaiterDao {
 
     @Override
     public List<Waiter> findAll() {
+        String sql = "SELECT * FROM waiter";
+        try (Statement statement = connection.createStatement()){
+            List<Waiter> waiters = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery(sql);
+            WaiterMapper waiterMapper = new WaiterMapper();
+            while (resultSet.next()) {
+                Waiter waiter = waiterMapper.extractFromResultSet(resultSet);
+                waiters.add(waiter);
+            }
+            logger.info("Found  waiters " + waiters);
+            return waiters;
+
+        } catch (SQLException e) {
+            logger.error(e);
+        }
         return null;
     }
 
