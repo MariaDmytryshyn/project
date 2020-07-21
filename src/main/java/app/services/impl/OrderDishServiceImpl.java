@@ -7,7 +7,7 @@ import app.model.entity.OrderDish;
 
 import java.util.List;
 
-public class OrderDishService implements app.services.OrderDishService {
+public class OrderDishServiceImpl implements app.services.OrderDishService {
 
     DaoFactory daoFactory = DaoFactory.getInstance();
 
