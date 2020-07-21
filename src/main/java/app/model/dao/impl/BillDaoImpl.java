@@ -103,11 +103,10 @@ public class BillDaoImpl implements BillDao {
         try (Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery(sql);
             BillMapper billMapper = new BillMapper();
-            while (resultSet.next()) {
-                Bill bill = billMapper.extractFromResultSet(resultSet);
-                logger.info("Found bill " + bill);
-                return bill;
-            }
+            resultSet.next();
+            Bill bill = billMapper.extractFromResultSet(resultSet);
+            logger.info("Found bill " + bill);
+            return bill;
         } catch (SQLException e) {
             logger.error(e);
         }

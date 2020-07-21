@@ -52,6 +52,7 @@ public class DishDaoImpl implements DishDao {
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
             DishMapper dishMapper = new DishMapper();
+            resultSet.next();
             Dish dish = dishMapper.extractFromResultSet(resultSet);
             logger.info("Found dish " + dish + " by name " + name);
             return dish;
@@ -67,6 +68,7 @@ public class DishDaoImpl implements DishDao {
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
             DishMapper dishMapper = new DishMapper();
+            resultSet.next();
             Dish dish = dishMapper.extractFromResultSet(resultSet);
             logger.info("Fond dish " + dish);
             return dish;

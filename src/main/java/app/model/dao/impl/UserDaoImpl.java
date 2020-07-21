@@ -25,6 +25,7 @@ public class UserDaoImpl implements UserDao {
         try (Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery(sql);
             UserMapper userMapper = new UserMapper();
+            resultSet.next();
             User user = userMapper.extractFromResultSet(resultSet);
             logger.info("User found " + user);
             return user;

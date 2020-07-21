@@ -30,11 +30,11 @@ public class TableDaoImpl implements TablesDao {
         try (Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery(sql);
             TableMapper tableMapper = new TableMapper();
-            while (resultSet.next()) {
-                Tables table = tableMapper.extractFromResultSet(resultSet);
-                logger.info("Found table by id " + table);
-                return table;
-            }
+            resultSet.next();
+            Tables table = tableMapper.extractFromResultSet(resultSet);
+logger.info("Found table by id " + table);
+return table;
+
         } catch (SQLException e) {
             logger.error(e);
         }

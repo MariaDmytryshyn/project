@@ -11,7 +11,6 @@ public class Main {
         DaoFactoryImpl daoFactory = new DaoFactoryImpl();
         CategoryDao categoryDao = daoFactory.createCategoryDao();
         System.out.println(categoryDao.findOne(1).toString());
-        categoryDao.deleteById(10);
         OrderDishDao orderDishDao = daoFactory.createOrderDishDao();
         orderDishDao.insertDishToOrder(1, 1);
         orderDishDao.insertDishToOrder(2, 1);

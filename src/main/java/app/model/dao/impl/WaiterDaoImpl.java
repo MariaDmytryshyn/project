@@ -31,11 +31,13 @@ public class WaiterDaoImpl implements WaiterDao {
         try (Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery(sql);
             WaiterMapper waiterMapper = new WaiterMapper();
+            resultSet.next();
             Waiter waiter = waiterMapper.extractFromResultSet(resultSet);
             String sql_1 = "SELECT * FROM tables WHERE id = "+waiter.getTable_id();
             try (Statement statement1 = connection.createStatement()) {
                 ResultSet resultSet1 = statement1.executeQuery(sql_1);
                 TableMapper tableMapper = new TableMapper();
+                resultSet1.next();
                 Tables table = tableMapper.extractFromResultSet(resultSet1);
                 logger.info("Found table " + table + " served by waiter " + waiter);
                 return table;
@@ -58,6 +60,7 @@ public class WaiterDaoImpl implements WaiterDao {
         try (Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery(sql);
             WaiterMapper waiterMapper = new WaiterMapper();
+            resultSet.next();
             Waiter waiter = waiterMapper.extractFromResultSet(resultSet);
             logger.info("Found waiter " + waiter);
             return waiter;
@@ -74,6 +77,7 @@ public class WaiterDaoImpl implements WaiterDao {
         try (Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery(sql);
             WaiterMapper waiterMapper = new WaiterMapper();
+            resultSet.next();
             Waiter waiter = waiterMapper.extractFromResultSet(resultSet);
             logger.info("Found  waiter " + waiter);
             return waiter;

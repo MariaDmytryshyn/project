@@ -28,10 +28,12 @@ public class CategoryDaoImpl implements CategoryDao {
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
             CategoryMapper categoryMapper = new CategoryMapper();
+            resultSet.next();
             Category category = categoryMapper.extractFromResultSet(resultSet);
             logger.info("Found category " +category);
             return category;
         } catch (SQLException e) {
+            e.printStackTrace();
             logger.error(e);
         }
         return null;
