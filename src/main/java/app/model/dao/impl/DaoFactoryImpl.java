@@ -1,19 +1,17 @@
 package app.model.dao.impl;
 
 
-import app.configuration.DBCPDataSource;
+
 import app.model.dao.*;
 
-import javax.sql.DataSource;
-import java.beans.PropertyVetoException;
-import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DaoFactoryImpl extends DaoFactory {
 
-    Connection connection;
+    private Connection connection;
 
     {
         try {

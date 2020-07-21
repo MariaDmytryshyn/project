@@ -45,11 +45,9 @@ public class OrderDaoImpl implements OrdersDao {
         try (Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery(sql);
             OrderMapper orderMapper = new OrderMapper();
-            while (resultSet.next()) {
-                Orders order = orderMapper.extractFromResultSet(resultSet);
-                logger.info("Found order by id " + order);
-                return order;
-            }
+            Orders order = orderMapper.extractFromResultSet(resultSet);
+            logger.info("Found order by id " + order);
+            return order;
         } catch (SQLException e) {
             logger.error(e);
         }

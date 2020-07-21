@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
@@ -27,18 +28,30 @@ public class UserDaoImpl implements UserDao {
         try (Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery(sql);
             UserMapper userMapper = new UserMapper();
-            while (resultSet.next()) {
-                User user = userMapper.extractFromResultSet(resultSet);
-                return user;
-            }
+            User user = userMapper.extractFromResultSet(resultSet);
+            logger.info("User found " + user);
+            return user;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         return null;
     }
 
     @Override
     public List<User> findAll() {
+        String sql = "SELECT * FROM user ";
+        try (Statement statement = connection.createStatement()){
+            List<User> users = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery(sql);
+            UserMapper userMapper = new UserMapper();
+            while (resultSet.next()) {
+                User user = userMapper.extractFromResultSet(resultSet);
+                users.add(user);
+            }
+            logger.info("All users are found " + users);
+        } catch (SQLException e) {
+            logger.error(e);
+        }
         return null;
     }
 
@@ -55,5 +68,53 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteById(int entityId) {
 
+    }
+
+    @Override
+    public User findByLogPass(String log, String pass) {
+        String sql = "SELECT * FROM user WHERE login =" + log + " and password=" + pass;
+        try (Statement statement = connection.createStatement()){
+            ResultSet resultSet = statement.executeQuery(sql);
+            UserMapper userMapper = new UserMapper();
+            User user = userMapper.extractFromResultSet(resultSet);
+            logger.info("User found " + user  + " with login " + log + " and password " + pass);
+            return user;
+
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+        return null;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        String sql = "SELECT * FROM user WHERE e_mail =" + email;
+        try (Statement statement = connection.createStatement()){
+            ResultSet resultSet = statement.executeQuery(sql);
+            UserMapper userMapper = new UserMapper();
+            User user = userMapper.extractFromResultSet(resultSet);
+            logger.info("User found " + user  + " with email " + email);
+            return user;
+
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+        return null;
+    }
+
+    @Override
+    public User findByMobNum(String mobnumber) {
+        String sql = "SELECT * FROM user WHERE mob_number =" + mobnumber;
+        try (Statement statement = connection.createStatement()){
+            ResultSet resultSet = statement.executeQuery(sql);
+            UserMapper userMapper = new UserMapper();
+            User user = userMapper.extractFromResultSet(resultSet);
+            logger.info("User found " + user  + " with mobile number " + mobnumber);
+            return user;
+
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+        return null;
     }
 }
