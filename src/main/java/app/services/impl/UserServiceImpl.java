@@ -12,21 +12,29 @@ public class UserServiceImpl implements UserService {
     DaoFactory daoFactory = DaoFactory.getInstance();
 
     @Override
-    public User findByLogPass(String log, String pass) {
+    public User findByLogNumEmail(String log, String number, String email) {
         UserDao userDao = daoFactory.createUserDao();
-        return  userDao.findByLogPass(log, pass);
+        return  userDao.findByLogNumEmail(log, number, email);
     }
 
     @Override
-    public User findByEmail(String email) {
-        UserDao userDao = daoFactory.createUserDao();
-        return  userDao.findByEmail(email);
+    public boolean correctEmail(String email, String ex) {
+        return email.matches(ex);
     }
 
     @Override
-    public User findByMobNum(String mobnumber) {
-        UserDao userDao = daoFactory.createUserDao();
-        return  userDao.findByMobNum(mobnumber);
+    public boolean correctPassword(String password, String ex) {
+        return password.matches(ex);
+    }
+
+    @Override
+    public boolean correctLogin(String login, String ex) {
+        return login.matches(ex);
+    }
+
+    @Override
+    public boolean correctNumber(String number, String ex) {
+        return number.matches(ex);
     }
 
     @Override

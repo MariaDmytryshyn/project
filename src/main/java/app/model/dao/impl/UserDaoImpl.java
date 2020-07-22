@@ -85,13 +85,13 @@ return false;
     }
 
     @Override
-    public User findByLogPass(String log, String pass) {
-        String sql = "SELECT * FROM user WHERE login =" + log + " and password=" + pass;
+    public User findByLogNumEmail(String log, String number, String email) {
+        String sql = "SELECT * FROM user WHERE login =" + log + " and e_mail=" + email + " and mob_number=" + number;
         try (Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery(sql);
             UserMapper userMapper = new UserMapper();
             User user = userMapper.extractFromResultSet(resultSet);
-            logger.info("User found " + user  + " with login " + log + " and password " + pass);
+            logger.info("User found " + user  + " with login " + log + " and email " + email + " and with number " + number);
             return user;
         } catch (SQLException e) {
             logger.error(e);
@@ -99,33 +99,7 @@ return false;
         return null;
     }
 
-    @Override
-    public User findByEmail(String email) {
-        String sql = "SELECT * FROM user WHERE e_mail =" + email;
-        try (Statement statement = connection.createStatement()){
-            ResultSet resultSet = statement.executeQuery(sql);
-            UserMapper userMapper = new UserMapper();
-            User user = userMapper.extractFromResultSet(resultSet);
-            logger.info("User found " + user  + " with email " + email);
-            return user;
-        } catch (SQLException e) {
-            logger.error(e);
-        }
-        return null;
-    }
 
-    @Override
-    public User findByMobNum(String mobnumber) {
-        String sql = "SELECT * FROM user WHERE mob_number =" + mobnumber;
-        try (Statement statement = connection.createStatement()){
-            ResultSet resultSet = statement.executeQuery(sql);
-            UserMapper userMapper = new UserMapper();
-            User user = userMapper.extractFromResultSet(resultSet);
-            logger.info("User found " + user  + " with mobile number " + mobnumber);
-            return user;
-        } catch (SQLException e) {
-            logger.error(e);
-        }
-        return null;
-    }
+
+
 }

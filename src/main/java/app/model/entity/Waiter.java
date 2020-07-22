@@ -8,19 +8,15 @@ public class Waiter {
     private String name_en;
     private int table_id;
     private Tables table;
-    private String login;
-    private String password;
 
     public Waiter() {
     }
 
-    public Waiter(int id, String name, String name_en, int table_id, String login, String password) {
+    public Waiter(int id, String name, String name_en, int table_id) {
         this.id = id;
         this.name = name;
         this.name_en = name_en;
         this.table_id = table_id;
-        this.login = login;
-        this.password = password;
     }
 
     public int getId() {
@@ -64,21 +60,6 @@ public class Waiter {
         this.table_id = table.getTablesId();
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -88,14 +69,12 @@ public class Waiter {
         return id == waiter.id &&
                 table_id == waiter.table_id &&
                 Objects.equals(name, waiter.name) &&
-                Objects.equals(name_en, waiter.name_en) &&
-                Objects.equals(login, waiter.login) &&
-                Objects.equals(password, waiter.password);
+                Objects.equals(name_en, waiter.name_en);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, name_en, table_id, login, password);
+        return Objects.hash(id, name, name_en, table_id);
     }
 
     @Override
@@ -103,8 +82,6 @@ public class Waiter {
         return "Waiter" +
                 " name is " + name + '\'' +
                 ", name_en is " + name_en + '\'' +
-                ", table number is " + table_id +
-                ", login is " + login + '\'' +
-                ", password is " + password;
+                ", table number is " + table_id;
     }
 }
