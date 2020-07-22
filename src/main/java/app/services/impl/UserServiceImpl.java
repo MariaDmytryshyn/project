@@ -18,6 +18,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByLogPass(String login, String password) {
+        UserDao userDao = daoFactory.createUserDao();
+        return  userDao.findByLogPass(login, password);
+    }
+
+    @Override
+    public User findByLog(String login) {
+        UserDao userDao = daoFactory.createUserDao();
+        return  userDao.findByLog(login);
+    }
+
+    @Override
     public boolean correctEmail(String email, String ex) {
         return email.matches(ex);
     }

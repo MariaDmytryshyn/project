@@ -99,7 +99,35 @@ return false;
         return null;
     }
 
+    @Override
+    public User findByLogPass(String login, String password) {
+        String sql = "SELECT * FROM user WHERE login =" + login + " and password=" + password;
+        try (Statement statement = connection.createStatement()){
+            ResultSet resultSet = statement.executeQuery(sql);
+            UserMapper userMapper = new UserMapper();
+            User user = userMapper.extractFromResultSet(resultSet);
+            logger.info("User found " + user  + " with login " + login + " and password " + password);
+            return user;
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+        return null;
+    }
 
+    @Override
+    public User findByLog(String login) {
+        String sql = "SELECT * FROM user WHERE login =" + login;
+        try (Statement statement = connection.createStatement()){
+            ResultSet resultSet = statement.executeQuery(sql);
+            UserMapper userMapper = new UserMapper();
+            User user = userMapper.extractFromResultSet(resultSet);
+            logger.info("User found " + user  + " with login " + login);
+            return user;
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+        return null;
+    }
 
 
 }

@@ -1,5 +1,9 @@
 package app.commands;
 
+import app.commands.impl.LoginCommand;
+import app.commands.impl.LogoutCommand;
+import app.commands.impl.RegistrationCommand;
+
 public class CommandFactory {
 
     private static CommandFactory instance;
