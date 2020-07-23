@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class Orders {
@@ -15,13 +16,13 @@ public class Orders {
     private int waiter_id;
     private Waiter waiter;
     private User user;
-    private ArrayList<Dish> listOrder;
+    private List<Dish> listOrder;
     private Bill bill;
 
     public Orders() {
     }
 
-    public Orders(Timestamp date_time, int waiter_id, int user_id, ArrayList<Dish> listOrder) {
+    public Orders(Timestamp date_time, int waiter_id, int user_id, List<Dish> listOrder) {
         this.date_time = date_time;
         this.waiter_id = waiter_id;
         this.user_id = user_id;
@@ -60,7 +61,7 @@ public class Orders {
         return date_time;
     }
 
-    public void setDate_time(Timestamp date_time) {
+    public void setDate_time(Date date_time) {
         this.date_time = date_time;
     }
 
@@ -88,11 +89,11 @@ public class Orders {
         this.user = user;
     }
 
-    public ArrayList<Dish> getListOrder() {
+    public List<Dish> getListOrder() {
         return listOrder;
     }
 
-    public void setListOrder(ArrayList<Dish> listOrder) {
+    public void setListOrder(List<Dish> listOrder) {
         this.listOrder = listOrder;
     }
 
