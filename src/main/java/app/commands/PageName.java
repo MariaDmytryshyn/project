@@ -10,5 +10,8 @@ public class PageName {
 
     public static final String MENU = "menu.jsp";
     public static final String CATEGORY = "category.jsp";
+    public static final String ORDER = "order.jsp";
+    public static final String SELECT = "select.jsp";
+    public static final String ALL_RESERVED = "reserved.jsp";
 
 }

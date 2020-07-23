@@ -3,6 +3,7 @@ package app.services.impl;
 import app.model.dao.DaoFactory;
 import app.model.dao.TablesDao;
 import app.model.entity.Tables;
+import app.model.entity.Waiter;
 import app.services.TablesService;
 
 import java.util.List;
@@ -37,5 +38,17 @@ public class TablesServiceImpl implements TablesService {
     @Override
     public boolean deleteById(int entityId) {
         return false;
+    }
+
+    @Override
+    public List<Tables> findFree() {
+        TablesDao tablesDao = daoFactory.createTableDao();
+        return tablesDao.findFree();
+    }
+
+    @Override
+    public Waiter findWaiter(Tables entity) {
+        TablesDao tablesDao = daoFactory.createTableDao();
+        return tablesDao.findWaiter(entity);
     }
 }

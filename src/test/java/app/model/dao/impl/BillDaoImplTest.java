@@ -22,7 +22,7 @@ public class BillDaoImplTest {
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/restaurant", "root", "root");
         BillDaoImpl billDao = new BillDaoImpl(connection);
         Bill bill = new Bill(1, new BigDecimal(50.00), new Date(2020, 7, 15), 5, 8, 1, Bill.BillStatus.ОПЛАЧЕНИЙ, Bill.BillStatus_En.PAID);
-        bill.setWaiter(new Waiter(1, "Isas", "ff", 5, "ffg", "fkdkd"));
+        bill.setWaiter(new Waiter(1, "Isas", "ff", 5));
 
         Bill res = billDao.insert(bill);
         assertEquals(bill, res);

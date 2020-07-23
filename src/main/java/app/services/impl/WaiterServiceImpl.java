@@ -14,12 +14,6 @@ public class WaiterServiceImpl implements WaiterService {
     DaoFactory daoFactory = DaoFactory.getInstance();
 
     @Override
-    public Tables getTable(int id) {
-        WaiterDao waiterDao = daoFactory.createWaiterDao();
-        return waiterDao.getTable(id);
-    }
-
-    @Override
     public Waiter getWaiterByName(String name, Language language) {
         WaiterDao waiterDao = daoFactory.createWaiterDao();
         return waiterDao.getWaiterByName(name, language);

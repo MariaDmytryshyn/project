@@ -55,7 +55,7 @@ public class Tables {
 
     @Override
     public String toString() {
-        return "Table number is" + number;
+        return "Table number " + number;
     }
 }
 

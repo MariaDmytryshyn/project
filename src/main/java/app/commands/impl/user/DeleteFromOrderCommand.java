@@ -8,28 +8,19 @@ import app.services.Services;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 
-public class AddToOrderCommand implements Command {
+public class DeleteFromOrderCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
         String page = PageName.ORDER;
-
-        int dish_id = Integer.parseInt(request.getParameter("dish_id"));
-
+        int dishToRemove = Integer.parseInt(request.getParameter("idDelete"));
+        Dish dish = Services.DISH_SERVICE.findOne(dishToRemove);
         List<Dish> dishes = (List<Dish>) request.getSession(false).getAttribute("order");
-
-        if (dishes == null) {
-            dishes = new ArrayList<>();
-        }
-
-        Dish dish = Services.DISH_SERVICE.findOne(dish_id);
-        dishes.add(dish);
-
+        dishes.remove(dish);
         request.getSession(false).setAttribute("order", dishes);
+        return page;
 
-        return  page;
     }
 }
