@@ -8,10 +8,7 @@ import app.model.entity.Waiter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,6 +112,19 @@ public class WaiterDaoImpl implements WaiterDao {
 
     @Override
     public boolean update(Waiter entity) {
+        String sql = "UPDATE waiter SET is_free = false  where id=" + entity.getId();
+        try (PreparedStatement statement = connection.prepareStatement(sql)){
+            boolean res = statement.executeUpdate(sql)>0;
+            if (res == true ) {
+                logger.info("Waiter is updated");
+            }
+            else {
+                logger.info("Waiter is not updated");
+            }
+            return res;
+        } catch (SQLException ex) {
+            logger.error(ex);
+        }
         return false;
     }
 

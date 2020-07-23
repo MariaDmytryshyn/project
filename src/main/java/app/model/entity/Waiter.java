@@ -7,6 +7,16 @@ public class Waiter {
     private String name;
     private String name_en;
     private int table_id;
+    private boolean is_free;
+
+    public boolean isIs_free() {
+        return is_free;
+    }
+
+    public void setIs_free(boolean is_free) {
+        this.is_free = is_free;
+    }
+
     private Tables table;
 
     public Waiter() {

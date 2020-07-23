@@ -44,7 +44,8 @@ public class WaiterServiceImpl implements WaiterService {
 
     @Override
     public boolean update(Waiter entity) {
-        return false;
+        WaiterDao waiterDao = daoFactory.createWaiterDao();
+        return waiterDao.update(entity);
     }
 
     @Override

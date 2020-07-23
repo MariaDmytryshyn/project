@@ -5,7 +5,15 @@ import java.util.Objects;
 public class Tables {
     private int id;
     private int number;
+    private boolean is_free;
 
+    public boolean isIs_free() {
+        return is_free;
+    }
+
+    public void setIs_free(boolean is_free) {
+        this.is_free = is_free;
+    }
 
     public Tables() {
     }

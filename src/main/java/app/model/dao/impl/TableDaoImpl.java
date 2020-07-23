@@ -8,10 +8,7 @@ import app.model.entity.Tables;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +64,20 @@ return table;
 
     @Override
     public boolean update(Tables entity) {
+
+        String sql = "UPDATE tables SET is_free = false  where id=" + entity.getTablesId();
+        try (PreparedStatement statement = connection.prepareStatement(sql)){
+            boolean res = statement.executeUpdate(sql)>0;
+            if (res == true ) {
+                logger.info("Table is updated");
+            }
+            else {
+                logger.info("Table is not updated");
+            }
+            return res;
+        } catch (SQLException ex) {
+            logger.error(ex);
+        }
         return false;
     }
 

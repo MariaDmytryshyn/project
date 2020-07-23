@@ -13,6 +13,7 @@ public class TableMapper implements ObjectMapper<Tables> {
 
         table.setTablesId(rs.getInt("id"));
         table.setTablesNumber(rs.getInt("number"));
+        table.setIs_free(rs.getBoolean("is_free"));
 
         return table;
     }

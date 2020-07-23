@@ -15,6 +15,7 @@ public class WaiterMapper implements ObjectMapper<Waiter> {
         waiter.setName(rs.getString("name"));
         waiter.setName_en(rs.getString("name_en"));
         waiter.setTable_id(rs.getInt("table_id"));
+        waiter.setIs_free(rs.getBoolean("is_free"));
 
         return waiter;
     }

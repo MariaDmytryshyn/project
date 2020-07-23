@@ -1,7 +1,7 @@
 package app.commands;
 
 public class PageName {
-    public static final String START = "start.jsp";
+    public static final String INDEX = "index.jsp";
     public static final String REGISTER = "register.jsp";
     public static final String LOGIN = "login.jsp";
     public static final String LOGOUT = "loguot.jsp";

@@ -30,7 +30,8 @@ public class TablesServiceImpl implements TablesService {
 
     @Override
     public boolean update(Tables entity) {
-        return false;
+        TablesDao tablesDao = daoFactory.createTableDao();
+        return tablesDao.update(entity);
     }
 
     @Override

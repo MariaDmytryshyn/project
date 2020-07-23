@@ -17,6 +17,6 @@ public class LogoutCommand implements Command {
     public String  execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         request.getSession().invalidate();
         logger.info("You successfully logged out");
-        return PageName.START;
+        return PageName.INDEX;
     }
 }
