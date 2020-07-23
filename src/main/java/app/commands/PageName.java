@@ -8,4 +8,7 @@ public class PageName {
     public static final String USER_MAIN = "user_main.jsp";
     public static final String ADMIN_MAIN ="admin_main.jsp";
 
+    public static final String MENU = "menu.jsp";
+    public static final String CATEGORY = "category.jsp";
+
 }
