@@ -132,7 +132,7 @@ public class BillDaoImpl implements BillDao {
 
     @Override
     public Bill insert(Bill entity) {
-        String sql = "INSERT INTO bill(price, date_time, order_id, user_id, waiter_id, status, status_en) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO bill(price, date_time, order_id, user_id, waiter_id) VALUES (?, ?, ?, ?, ?)";
         Date dt = new Date(entity.getDate_time().getTime());
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setBigDecimal(1, entity.getPrice());
@@ -140,8 +140,6 @@ public class BillDaoImpl implements BillDao {
             preparedStatement.setInt(3, entity.getOder_id());
             preparedStatement.setInt(4, entity.getUser().getId());
             preparedStatement.setInt(5, entity.getWaiter().getId());
-            preparedStatement.setString(6, entity.getBillStatus().toString());
-            preparedStatement.setString(7, entity.getBillStatus_en().toString());
             if (preparedStatement.executeUpdate() > 0) {
                 logger.info("Bill is inserted");
                 return entity;

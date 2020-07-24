@@ -15,8 +15,7 @@ public class Dish {
     public Dish() {
     }
 
-    public Dish(int id, String name, String name_en, BigDecimal price, int category_id) {
-        this.id = id;
+    public Dish(String name, String name_en, BigDecimal price, int category_id) {
         this.name = name;
         this.name_en = name_en;
         this.price = price;

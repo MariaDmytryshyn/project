@@ -30,8 +30,7 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(int id, BigDecimal price, Date date_time, int oder_id, int user_id, int waiter_id, BillStatus billStatus, BillStatus_En billStatus_en) {
-        this.id = id;
+    public Bill(BigDecimal price, Date date_time, int oder_id, int user_id, int waiter_id, BillStatus billStatus, BillStatus_En billStatus_en) {
         this.price = price;
         this.date_time = date_time;
         this.oder_id = oder_id;

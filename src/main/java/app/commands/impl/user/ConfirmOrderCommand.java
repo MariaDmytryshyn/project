@@ -7,6 +7,8 @@ import app.model.entity.Orders;
 import app.model.entity.User;
 import app.model.entity.Waiter;
 import app.services.Services;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +17,15 @@ import java.sql.Date;
 import java.util.List;
 
 public class ConfirmOrderCommand implements Command {
+
+    private static final Logger logger = LogManager.getLogger(ConfirmOrderCommand.class);
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         String page = PageName.ORDER;
         List<Dish> dishes = (List<Dish>) request.getSession().getAttribute("order");
         if (dishes.isEmpty() ) {
+            logger.error("You did't select anything");
             return page;
         }
         Orders order = new Orders();

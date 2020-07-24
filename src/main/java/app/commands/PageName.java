@@ -13,5 +13,7 @@ public class PageName {
     public static final String ORDER = "order.jsp";
     public static final String PAY = "pay.jsp";
     public static final String ALL_RESERVED = "reserved.jsp";
+    public static final String EDIT_MENU = "edit_menu.jsp";
+    public static final String SHOW_USER = "show_user.jsp";
 
 }

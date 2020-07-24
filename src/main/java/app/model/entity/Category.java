@@ -10,8 +10,7 @@ public class Category {
     public Category() {
     }
 
-    public Category(int id, String name, String name_en) {
-        this.id = id;
+    public Category(String name, String name_en) {
         this.name = name;
         this.name_en = name_en;
     }
