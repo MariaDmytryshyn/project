@@ -2,6 +2,7 @@ package app.commands.impl.user;
 
 import app.commands.Command;
 import app.commands.PageName;
+import app.commands.ParameterName;
 import app.exceptions.HttpException;
 import app.model.entity.Category;
 import app.model.entity.Dish;
@@ -23,8 +24,8 @@ public class CategoryCommand implements Command {
 
         String page = PageName.CATEGORY;
 
-        Integer categoryId = Integer.parseInt(request.getParameter("id"));
-        request.setAttribute("category_id", categoryId);
+        Integer categoryId = Integer.parseInt(request.getParameter(ParameterName.ID));
+        request.setAttribute(ParameterName.CATEGORY_ID, categoryId);
         Category category =  Services.CATEGORY_SERVICE.findOne(categoryId);
 
         String categoryName = category.getCategoryName();
@@ -32,8 +33,8 @@ public class CategoryCommand implements Command {
         List<Dish> dishes = Services.DISH_SERVICE.findByCategory(categoryId);
 
         if (dishes != null) {
-            request.setAttribute("dishes", dishes);
-            request.setAttribute("categoryName", categoryName);
+            request.setAttribute(ParameterName.DISHES, dishes);
+            request.setAttribute(ParameterName.CATEGORY_NAME, categoryName);
             logger.info("Dishes are found");
         }
         else {

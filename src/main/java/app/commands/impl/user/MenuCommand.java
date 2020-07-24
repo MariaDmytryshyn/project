@@ -2,6 +2,7 @@ package app.commands.impl.user;
 
 import app.commands.Command;
 import app.commands.PageName;
+import app.commands.ParameterName;
 import app.exceptions.HttpException;
 import app.model.entity.Category;
 import app.services.CategoryService;
@@ -26,7 +27,7 @@ public class MenuCommand implements Command {
         List<Category> categoryList = getAllCategories.findAll();
         if (categoryList != null)  {
             logger.info("Categories are found");
-            request.setAttribute("categories", categoryList);
+            request.setAttribute(ParameterName.CATEGORIES, categoryList);
         }
         else {
             logger.error("Categories aren't found");

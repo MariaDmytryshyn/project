@@ -2,6 +2,7 @@ package app.commands.impl.user;
 
 import app.commands.Command;
 import app.commands.PageName;
+import app.commands.ParameterName;
 import app.model.entity.Dish;
 import app.model.entity.Orders;
 import app.model.entity.User;
@@ -23,7 +24,7 @@ public class ConfirmOrderCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         String page = PageName.ORDER;
-        List<Dish> dishes = (List<Dish>) request.getSession().getAttribute("order");
+        List<Dish> dishes = (List<Dish>) request.getSession().getAttribute(ParameterName.ORDER);
         if (dishes.isEmpty() ) {
             logger.error("You did't select anything");
             return page;
@@ -34,13 +35,13 @@ public class ConfirmOrderCommand implements Command {
         long millis=System.currentTimeMillis();
         Date date = new Date(millis);
         order.setDate_time(date);
-        User user = (User) request.getSession().getAttribute("USER");
+        User user = (User) request.getSession().getAttribute(ParameterName.USER);
         order.setUser_id(user.getId());
-        Waiter waiter = (Waiter) request.getSession().getAttribute("waiter");
+        Waiter waiter = (Waiter) request.getSession().getAttribute(ParameterName.WAITER);
         order.setWaiter_id(waiter.getId());
         Services.ORDERS_SERVICE.insert(order);
-        request.getSession().setAttribute("orderToPay", order);
-        request.getSession().removeAttribute("order");
+        request.getSession().setAttribute(ParameterName.ORDER_TO_PAY, order);
+        request.getSession().removeAttribute(ParameterName.ORDER);
         return  PageName.PAY;
     }
 }

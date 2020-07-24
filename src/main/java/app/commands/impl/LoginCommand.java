@@ -2,6 +2,7 @@ package app.commands.impl;
 
 import app.commands.Command;
 import app.commands.PageName;
+import app.commands.ParameterName;
 import app.exceptions.HttpException;
 import app.model.entity.User;
 import app.services.Services;
@@ -19,8 +20,8 @@ public class LoginCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
+        String login = request.getParameter(ParameterName.LOGIN);
+        String password = request.getParameter(ParameterName.PASSWORD);
         if (login == null) {
             throw new HttpException(400, "Enter the login");
         }
@@ -41,12 +42,12 @@ public class LoginCommand implements Command {
             User user = userService.findByLogPass(login, password);
             logger.info("User is log in");
             if (userService.findByLogPass(login, password).getRole() == User.ROLE.USER) {
-                request.getSession().setAttribute("USER", user);
+                request.getSession().setAttribute(ParameterName.USER, user);
                 return PageName.USER_MAIN;
 
             }
             else {
-                request.getSession().setAttribute("ADMIN", user);
+                request.getSession().setAttribute(ParameterName.ADMIN, user);
                 return PageName.ADMIN_MAIN;
             }
         }

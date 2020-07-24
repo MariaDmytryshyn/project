@@ -2,6 +2,7 @@ package app.commands.impl.user;
 
 import app.commands.Command;
 import app.commands.PageName;
+import app.commands.ParameterName;
 import app.model.entity.Dish;
 import app.services.Services;
 
@@ -17,9 +18,9 @@ public class AddToOrderCommand implements Command {
 
         String page = PageName.ORDER;
 
-        int dish_id = Integer.parseInt(request.getParameter("dish_id"));
+        int dish_id = Integer.parseInt(request.getParameter(ParameterName.DISH_ID));
 
-        List<Dish> dishes = (List<Dish>) request.getSession(false).getAttribute("order");
+        List<Dish> dishes = (List<Dish>) request.getSession(false).getAttribute(ParameterName.ORDER);
 
         if (dishes == null) {
             dishes = new ArrayList<>();
@@ -28,7 +29,7 @@ public class AddToOrderCommand implements Command {
         Dish dish = Services.DISH_SERVICE.findOne(dish_id);
         dishes.add(dish);
 
-        request.getSession(false).setAttribute("order", dishes);
+        request.getSession(false).setAttribute(ParameterName.ORDER, dishes);
 
         return  page;
     }

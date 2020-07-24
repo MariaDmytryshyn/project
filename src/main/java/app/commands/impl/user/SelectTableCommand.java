@@ -2,6 +2,7 @@ package app.commands.impl.user;
 
 import app.commands.Command;
 import app.commands.PageName;
+import app.commands.ParameterName;
 import app.model.entity.Tables;
 import app.model.entity.Waiter;
 import app.services.Services;
@@ -33,8 +34,8 @@ public class SelectTableCommand implements Command {
        Waiter waiter = tablesService.findWaiter(table);
        WaiterService waiterService = Services.WAITER_SERVICE;
        waiterService.update(waiter);
-       request.getSession(false).setAttribute("table", table);
-       request.getSession(false).setAttribute("waiter", waiter);
+       request.getSession(false).setAttribute(ParameterName.TABLE, table);
+       request.getSession(false).setAttribute(ParameterName.WAITER, waiter);
         return page;
     }
 }

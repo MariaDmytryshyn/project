@@ -2,6 +2,7 @@ package app.commands.impl.admin;
 
 import app.commands.Command;
 import app.commands.PageName;
+import app.commands.ParameterName;
 import app.services.Services;
 
 import javax.servlet.ServletException;
@@ -12,7 +13,7 @@ public class DeleteDishCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         String page = PageName.EDIT_MENU;
-        Integer dishId = Integer.parseInt(request.getParameter("dishId"));
+        Integer dishId = Integer.parseInt(request.getParameter(ParameterName.DISH_ID));
         Services.DISH_SERVICE.deleteById(dishId);
         return page;
     }

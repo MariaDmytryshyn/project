@@ -2,6 +2,7 @@ package app.commands.impl.admin;
 
 import app.commands.Command;
 import app.commands.PageName;
+import app.commands.ParameterName;
 import app.services.Services;
 
 import javax.servlet.ServletException;
@@ -12,7 +13,7 @@ public class FindUserCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         String page = PageName.SHOW_USER;
-        Integer userId = Integer.parseInt(request.getParameter("userId"));
+        Integer userId = Integer.parseInt(request.getParameter(ParameterName.USER_ID));
         System.out.println(Services.BILL_SERVICE.PaidByUser(userId));
         System.out.println(Services.BILL_SERVICE.UnpaidByUser(userId));
         return page;

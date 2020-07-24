@@ -2,6 +2,7 @@ package app.commands.impl;
 
 import app.commands.Command;
 import app.commands.PageName;
+import app.commands.ParameterName;
 import app.configuration.Checker;
 import app.exceptions.HttpException;
 import app.model.entity.User;
@@ -20,10 +21,10 @@ public class RegistrationCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        String e_mail = request.getParameter("e_mail");
-        String tel = request.getParameter("mob_number");
+        String login = request.getParameter(ParameterName.LOGIN);
+        String password = request.getParameter(ParameterName.PASSWORD);
+        String e_mail = request.getParameter(ParameterName.EMAIL);
+        String tel = request.getParameter(ParameterName.NUMBER);
 
         String page = PageName.REGISTER;
         UserService service = Services.USER_SERVICE;
