@@ -15,8 +15,9 @@ public class CategoryDaoImplTest {
 
     @Test
     public void  findOneTest() {
-        Category category = new Category(10, "піца", "pizza");
-        assertEquals(category, categoryDao.findOne(10));
+        Category category = new Category("Сендвічі", "Burgers");
+        category.setCategoryId(1);
+        assertEquals(category, categoryDao.findOne(1));
     }
 }
 

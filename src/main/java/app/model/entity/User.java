@@ -108,9 +108,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id &&
-                name.equals(user.name) &&
-                login.equals(user.login) &&
+        return login.equals(user.login) &&
                 password.equals(user.password) &&
                 e_mail.equals(user.e_mail) &&
                 mob_number.equals(user.mob_number);
@@ -125,7 +123,6 @@ public class User {
     public String toString() {
         return "User" +
                 " id is " + id +
-                ", name is " + name + '\'' +
                 ", login is " + login + '\'' +
                 ", password is " + password + '\'' +
                 ", e-mail is " + e_mail +

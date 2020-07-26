@@ -138,7 +138,7 @@ public class BillDaoImpl implements BillDao {
             preparedStatement.setBigDecimal(1, entity.getPrice());
             preparedStatement.setDate(2, dt);
             preparedStatement.setInt(3, entity.getOder_id());
-            preparedStatement.setInt(4, entity.getUser().getId());
+            preparedStatement.setInt(4, entity.getUser_id());
             preparedStatement.setInt(5, entity.getWaiter().getId());
             if (preparedStatement.executeUpdate() > 0) {
                 logger.info("Bill is inserted");
